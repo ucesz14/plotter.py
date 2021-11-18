@@ -4,7 +4,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 # if plotting does not work comment the following line
-matplotlib.use('TkAgg')
+matplotlib.use('qt5Agg')
 
 
 class Plotter:

@@ -42,6 +42,26 @@ class Categorize:
             kind = 'outside'  
         
         return(kind)
+        
+    def csv_r(self, file_name):
+        num=[]
+        x=[]
+        y=[]
+    
+        with open (file_name) as f:
+            rows= f.readlines()[1:]
+            
+            
+        for row in rows:
+            num_t, x_t, y_t=row.split(',')
+                
+            num.append (float(num_t))
+        
+            x.append (float(x_t))
+        
+            y.append (float(y_t.strip()))
+        
+        return (x, y, num)
     
     
     

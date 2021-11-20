@@ -1,74 +1,73 @@
-
-
 class Categorize:
-    
+    def __init__(self):
+        pass
+
     def pip(self, xs, ys, x, y):
 
         x_min = min(xs)
         x_max = max(xs)
         y_min = min(ys)
         y_max = max(ys)
-        kind=[]
-        is_in = False
-        if x >= x_min and x <= x_max and y <= y_max and y >= y_min:
-            
+        # get the information for MBR
+
+        is_in = False     # set the in initial situation which is false, which means outside
+
+        if x_min <= x <= x_max and y_max >= y >= y_min:    # MBR method finished
+
             for i in range(len(xs)):
-                if i==0:
-                    j = len(xs)-1
+                if i == 0:
+                    j = len(xs) - 1
                 else:
-                     j=i-1
-                     
+                    j = i - 1
+            # here i and j is two point close to each other on polygon
+
                 if ys[i] == ys[j]:
-                    if ys[i] == y and abs(xs[i]-x)+abs(xs[j]-x) == abs(xs[i]-xs[j]):
+                    if ys[i] == y and abs(xs[i] - x) + abs(xs[j] - x) == abs(xs[i] - xs[j]):
                         kind = 'boundary'
                         break
+                # firstly consider the situation of function like y = n(constant), which will cause an error in the
+                # following calculation, as (ys[j] - ys[i]) is 0. A number is /0.
+
                 else:
                     if ((ys[i] > y) != (ys[j] > y)) and (x == (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]):
                         kind = 'boundary'
                         break
-                        
-                    else:
-                        if ((ys[i] > y) != (ys[j] > y)) and (x < (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]):
-                            is_in = not is_in
-                            
-                if is_in == True:
+
+                    elif ((ys[i] > y) != (ys[j] > y)) and (
+                            x < (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]):
+
+                        is_in = not is_in
+
+                # the method use the thinking of similar triangles, which is introduced in a blog,
+                # citation: https://www.jianshu.com/p/39c63ab0a219
+
+                if is_in:
                     kind = 'inside'
                 else:
                     kind = 'outside'
-                        
-        
+                # Odd number is true so inside, even number is false so outside, RCA finished
+
         else:
-            
-            kind = 'outside'  
-        
-        return(kind)
-        
+
+            kind = 'outside'
+
+        return kind
+
     def csv_r(self, file_name):
-        num=[]
-        x=[]
-        y=[]
-    
-        with open (file_name) as f:
-            rows= f.readlines()[1:]
-            
-            
+        num = []
+        x = []
+        y = []
+
+        with open(file_name) as f:
+            rows = f.readlines()[1:]  # start reading the data from second row
+
         for row in rows:
-            num_t, x_t, y_t=row.split(',')
-                
-            num.append (float(num_t))
-        
-            x.append (float(x_t))
-        
-            y.append (float(y_t.strip()))
-        
-        return (x, y, num)
-    
-    
-    
+            num_t, x_t, y_t = row.split(',')
 
+            num.append(float(num_t))
 
+            x.append(float(x_t))
 
-    
+            y.append(float(y_t.strip()))   # y_t has '\n' so it need to use strip
 
-
-
+        return x, y, num

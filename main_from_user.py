@@ -8,7 +8,7 @@ def main():
 
     print('read polygon.csv')
 
-    (x_p, y_p, num_p) = categorize.csv_r('polygon.csv')
+    (x_p, y_p, num_p) = categorize.csv_r('polygon.csv') # read csv
 
     plotter.add_polygon(x_p, y_p)
 
@@ -16,7 +16,7 @@ def main():
     try:
         x = float(input('x coordinate: '))
     except ValueError:
-        print('Please enter right x coordinate')
+        print('Please enter right x coordinate')  # debug the value error
     else:
         try:
             y = float(input('y coordinate: '))
@@ -26,7 +26,7 @@ def main():
         else:
 
             print('categorize point')
-            kind = (categorize.pip(x_p, y_p, x, y))
+            kind = categorize.pip(x_p, y_p, x, y)  # get the kind of the point
 
             print('plot polygon and point')
             plotter.add_point(x, y, kind)

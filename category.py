@@ -1,3 +1,51 @@
+class Geometry:
+    def __init__(self, name):
+        self.name = name
+
+    def get_name(self):
+        return self.name
+
+
+class Point(Geometry):
+
+    def __init__(self, name, x, y):
+        super().__init__(name)
+        self.__x = x
+        self.__y = y
+
+    def get_x(self):
+        return self.__x
+
+    def get_y(self):
+        return self.__y
+
+
+class Line(Geometry):
+    def __init__(self, name, point_1, point_2):
+        super().__init__(name)
+        self.__point_1 = point_1
+        self.__point_2 = point_2
+
+
+class Polygon(Geometry):
+    def __init__(self, name, points):
+        super().__init__(name)
+        self.__points = points
+
+    def get_points(self):
+        return self.__point
+
+    def lines(self):
+        res = []
+        points = self.get_getpoints()
+        point_a = points[0]
+        for point_b in points[1:]:
+            res.append(Line(point_a.get_name() + '-' + point_b.get_name(), point_a, point_b))
+            point_a = point_b
+        res.append(Line(point_a.get_name() + '-' + points[0].get_name(), point_a, points[0]))
+        return res
+
+
 class Categorize:
     def __init__(self):
         pass
@@ -10,16 +58,16 @@ class Categorize:
         y_max = max(ys)
         # get the information for MBR
 
-        is_in = False     # set the in initial situation which is false, which means outside
+        is_in = False  # set the in initial situation which is false, which means outside
 
-        if x_min <= x <= x_max and y_max >= y >= y_min:    # MBR method finished
+        if x_min <= x <= x_max and y_max >= y >= y_min:  # MBR method finished
 
             for i in range(len(xs)):
                 if i == 0:
                     j = len(xs) - 1
                 else:
                     j = i - 1
-            # here i and j is two point close to each other on polygon
+                # here i and j is two point close to each other on polygon
 
                 if ys[i] == ys[j]:
                     if ys[i] == y and abs(xs[i] - x) + abs(xs[j] - x) == abs(xs[i] - xs[j]):
@@ -68,6 +116,6 @@ class Categorize:
 
             x.append(float(x_t))
 
-            y.append(float(y_t.strip()))   # y_t has '\n' so it need to use strip
+            y.append(float(y_t.strip()))  # y_t has '\n' so it need to use strip
 
         return x, y, num

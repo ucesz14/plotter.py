@@ -71,8 +71,8 @@ class Polygon:
                         is_in = not is_in
                     # which means the ray from point get across a line of the polygon, so is_in change once
 
-                # the method use the thinking of similar triangles, which is introduced in a blog,
-                # citation: https://www.jianshu.com/p/39c63ab0a219
+                # the method use the thinking of similar triangles, which is introduced in a blog, citation:
+                # https://www.jianshu.com/p/39c63ab0a219, only the thinking is from there. code can not be copy
 
                 if is_in:
                     kind = 'inside'

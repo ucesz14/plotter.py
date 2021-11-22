@@ -37,5 +37,15 @@ class Plotter:
         by_label = OrderedDict(zip(labels, handles))
         plt.legend(by_label.values(), by_label.keys())
         plt.xlabel('x axis')
-        plt.ylabel('y axis')
+        plt.ylabel('y axis')     # add the axis label
+        plt.title('Point-in-Polygon Test')   # add the title
+        plt.show()
+
+    def show_po(self):  # For creativity, which changed the title
+        handles, labels = plt.gca().get_legend_handles_labels()
+        by_label = OrderedDict(zip(labels, handles))
+        plt.legend(by_label.values(), by_label.keys())
+        plt.xlabel('x axis')
+        plt.ylabel('y axis')     # add the axis label
+        plt.title('Polygon-in-Polygon Test')   # add the title
         plt.show()

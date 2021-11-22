@@ -11,7 +11,7 @@ def main():
 
     (x_p, y_p, num_p) = categorize.csv_r('polygon.csv') # read csv
 
-    plotter.add_polygon(x_p, y_p)
+    plotter.add_polygon(x_p, y_p)  # plot the polygon
 
     print('Insert point information')
     try:
@@ -30,7 +30,7 @@ def main():
             kind = polygon.pip(x_p, y_p, x, y)  # get the kind of the point
 
             print('plot polygon and point')
-            plotter.add_point(x, y, kind)
+            plotter.add_point(x, y, kind)   # plot the point
             plotter.show()
 
 

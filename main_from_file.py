@@ -35,6 +35,7 @@ def main():
 
         for i in range(len(x_pt)):    # write the other data
             output = str(i + 1) + ',' + kinds[i] + '\n'
+            # the first column is the ID and the second column is the categorization
             f.write(output)
 
     print('plot polygon and points')

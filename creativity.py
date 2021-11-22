@@ -36,7 +36,7 @@ def main():
 
     # The categorizing of test polygon, get the kind, plot the test polygon
 
-    plotter.show()
+    plotter.show_po()
 
 
 if __name__ == '__main__':

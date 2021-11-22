@@ -3,6 +3,7 @@ class Geometry:
         self.name = name
 
     def get_name(self):
+
         return self.name
 
 
@@ -32,12 +33,13 @@ class Polygon:
         pass
 
     def pip(self, xs, ys, x, y):
+        # xs is the list of the x and ys is the list of y of all polygon points
 
         x_min = min(xs)
         x_max = max(xs)
         y_min = min(ys)
         y_max = max(ys)
-        # get the information for MBR
+        # get the edge information for MBR
 
         is_in = False  # set the in initial situation which is false, which means outside
 
@@ -48,7 +50,7 @@ class Polygon:
                     j = len(xs) - 1
                 else:
                     j = i - 1
-                # here i and j is two point close to each other on polygon
+                # here i and j is two point close to each other on polygon, to create a line information
 
                 if ys[i] == ys[j]:
                     if ys[i] == y and abs(xs[i] - x) + abs(xs[j] - x) == abs(xs[i] - xs[j]):
@@ -61,11 +63,13 @@ class Polygon:
                     if ((ys[i] > y) != (ys[j] > y)) and (x == (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]):
                         kind = 'boundary'
                         break
+                    #  here means the point is on the line, so it should be boundary
 
                     elif ((ys[i] > y) != (ys[j] > y)) and (
                             x < (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]):
 
                         is_in = not is_in
+                    # which means the ray from point get across a line of the polygon, so is_in change once
 
                 # the method use the thinking of similar triangles, which is introduced in a blog,
                 # citation: https://www.jianshu.com/p/39c63ab0a219
@@ -105,7 +109,7 @@ class Categorize:
 
                 y.append(float(y_t.strip()))  # y_t has '\n' so it need to use strip
 
-        except ValueError:
-            print('WARNING: The format of data have some problems. Please check the data.')
+        except ValueError:  # check the format of file and then give out a warning of error
+            print('WARNING: The format of data have some problems. Please check the data file.')
 
         return x, y, num

@@ -15,6 +15,13 @@ class Plotter:
     def add_polygon(self, xs, ys):
         plt.fill(xs, ys, 'lightgray', label='Polygon')
 
+    def add_t_polygon(self, xs, ys, kind=None):  # for creativity to add the test polygon
+        if kind == 'not inside':
+            plt.fill(xs, ys, 'ro', label='not inside')
+
+        elif kind == 'inside':
+            plt.fill(xs, ys, 'go', label='inside')
+
     def add_point(self, x, y, kind=None):
         if kind == 'outside':
             plt.plot(x, y, 'ro', label='Outside')
@@ -29,4 +36,6 @@ class Plotter:
         handles, labels = plt.gca().get_legend_handles_labels()
         by_label = OrderedDict(zip(labels, handles))
         plt.legend(by_label.values(), by_label.keys())
+        plt.xlabel('x axis')
+        plt.ylabel('y axis')
         plt.show()

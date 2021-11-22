@@ -27,26 +27,7 @@ class Line(Geometry):
         self.__point_2 = point_2
 
 
-class Polygon(Geometry):
-    def __init__(self, name, points):
-        super().__init__(name)
-        self.__points = points
-
-    def get_points(self):
-        return self.__point
-
-    def lines(self):
-        res = []
-        points = self.get_getpoints()
-        point_a = points[0]
-        for point_b in points[1:]:
-            res.append(Line(point_a.get_name() + '-' + point_b.get_name(), point_a, point_b))
-            point_a = point_b
-        res.append(Line(point_a.get_name() + '-' + points[0].get_name(), point_a, points[0]))
-        return res
-
-
-class Categorize:
+class Polygon:
     def __init__(self):
         pass
 
@@ -101,6 +82,11 @@ class Categorize:
 
         return kind
 
+
+class Categorize:
+    def __init__(self):
+        pass
+
     def csv_r(self, file_name):
         num = []
         x = []
@@ -109,13 +95,17 @@ class Categorize:
         with open(file_name) as f:
             rows = f.readlines()[1:]  # start reading the data from second row
 
-        for row in rows:
-            num_t, x_t, y_t = row.split(',')
+        try:
+            for row in rows:
+                num_t, x_t, y_t = row.split(',')
 
-            num.append(float(num_t))
+                num.append(float(num_t))
 
-            x.append(float(x_t))
+                x.append(float(x_t))
 
-            y.append(float(y_t.strip()))  # y_t has '\n' so it need to use strip
+                y.append(float(y_t.strip()))  # y_t has '\n' so it need to use strip
+
+        except ValueError:
+            print('WARNING: The format of data have some problems. Please check the data.')
 
         return x, y, num

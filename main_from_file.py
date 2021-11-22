@@ -1,10 +1,11 @@
 from plotter import Plotter
-from category import Categorize  # this class includes the functions of pip and read csv
+from category import Categorize, Polygon  # this class includes the functions of pip and read csv
 
 
 def main():
     plotter = Plotter()
     categorize = Categorize()
+    polygon = Polygon()
 
     print('read polygon.csv')
 
@@ -20,7 +21,7 @@ def main():
     kinds = []       # is used to store the categorize information
 
     for i in range(len(x_pt)):
-        kind = (categorize.pip(x_p, y_p, x_pt[i], y_pt[i]))
+        kind = (polygon.pip(x_p, y_p, x_pt[i], y_pt[i]))
         plotter.add_point(x_pt[i], y_pt[i], kind)
         kinds.append(kind)
     # The categorizing of points, adding to list amd plot is done in one for statement
